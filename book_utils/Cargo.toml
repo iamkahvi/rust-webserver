@@ -1,12 +1,10 @@
 [package]
-name = "rust-webserver"
+name = "book_utils"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-book_utils = { path = "book_utils" }
-actix-web = "4"
 epub = "1.2.2"
 mobi = "0.8"

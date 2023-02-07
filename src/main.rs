@@ -1,4 +1,5 @@
 use actix_web::{get, web, App, HttpResponse, HttpServer, Responder};
+use book_utils::get_covers;
 use epub::doc::EpubDoc;
 use std::fs;
 use std::io::Write;
@@ -15,6 +16,7 @@ async fn index() -> impl Responder {
 
 #[get("/numberland")]
 async fn get_book() -> impl Responder {
+    get_covers();
     let doc = EpubDoc::new("books/Alex Bellos/Alex's Adventures in Numberland (90)/Alex's Adventures in Numberland - Alex Bellos.epub");
     match doc {
         Ok(mut d) => {

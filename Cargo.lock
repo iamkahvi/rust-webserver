@@ -258,6 +258,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "book_utils"
+version = "0.1.0"
+dependencies = [
+ "epub",
+ "mobi",
+]
+
+[[package]]
 name = "brotli"
 version = "3.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -892,6 +900,7 @@ name = "rust-webserver"
 version = "0.1.0"
 dependencies = [
  "actix-web",
+ "book_utils",
  "epub",
  "mobi",
 ]
