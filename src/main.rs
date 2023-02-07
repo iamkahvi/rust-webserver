@@ -1,8 +1,8 @@
 use actix_web::{get, web, App, HttpResponse, HttpServer, Responder};
-use book_utils::get_covers;
 use epub::doc::EpubDoc;
 use std::fs;
 use std::io::Write;
+use walkdir::WalkDir;
 
 #[get("/hello/{name}")]
 async fn greet(name: web::Path<String>) -> impl Responder {
@@ -11,12 +11,19 @@ async fn greet(name: web::Path<String>) -> impl Responder {
 
 #[get("/")]
 async fn index() -> impl Responder {
-    HttpResponse::Ok().body("Hello!")
+    let mut body = "Books:\n".to_owned();
+
+    for entry in WalkDir::new("./books") {
+        let mut path = entry.unwrap().path().to_str().unwrap().to_owned();
+        path.push_str("\n");
+        body.push_str(&path);
+    }
+
+    HttpResponse::Ok().body(body)
 }
 
 #[get("/numberland")]
 async fn get_book() -> impl Responder {
-    get_covers();
     let doc = EpubDoc::new("books/Alex Bellos/Alex's Adventures in Numberland (90)/Alex's Adventures in Numberland - Alex Bellos.epub");
     match doc {
         Ok(mut d) => {

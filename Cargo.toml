@@ -10,3 +10,4 @@ book_utils = { path = "book_utils" }
 actix-web = "4"
 epub = "1.2.2"
 mobi = "0.8"
+walkdir = "2"
